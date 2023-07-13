@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>스톱 워치</title>
+    <script>
+
+    var SetTime = 300;      
+      function stop5() {    
+        m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; 
+        var stop5 =m;  
+        document.all.cont1.innerHTML = stop5;                   
+        SetTime--;               
+        if (SetTime < 0) {          
+            clearInterval(tid);     
+            alert("종료");
+
+        }       
+    }
+    var SetTime = 180;      
+    function stop3() {    
+        m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; 
+        var stop3 =m;  
+        document.all.cont1.innerHTML = stop3;                   
+        SetTime--;               
+        if (SetTime < 0) {          
+            clearInterval(tid);     
+            alert("종료");
+
+        }       
+    }
+    var SetTime = 60;      
+    function stop1() {    
+        m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초"; 
+        var stop1 =m;  
+        document.all.cont1.innerHTML = stop1;                   
+        SetTime--;               
+        if (SetTime < 0) {          
+            clearInterval(tid);     
+            alert("종료");
+
+        }       
+    }
+    window.onload = function TimerStart(){ tid=setInterval('stop5()',1000) };
+    window.onload = function TimerStart(){ tid=setInterval('stop3()',1000) };
+    window.onload = function TimerStart(){ tid=setInterval('stop1()',1000) };
+
+
+    </script>
+</head>
+<body>
+    <div id ="wrap">
+        <div id ="header">
+            스탑 워치
+        </div>
+        <div id ="contents">
+            
+            <div id ="cont1">
+                <p class="big" id="time">00:00</p>
+
+            </div>
+            <div id ="cont2">
+                <div id ="button_box" class="button_box">
+                    <input class="btn" type="button" onclick="start()" value="▶" />
+                    <input class="btn" type="button" onclick="reset()" value="초기화" />
+                    <input class="btn" type="button" onclick="stop5()" value="5분" />
+                    <input class="btn" type="button" onclick="stop3()" value="3분" />
+                    <input class="btn" type="button" onclick="stop1()" value="1분" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

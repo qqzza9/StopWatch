@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스톱워치</title>
+    <style>
+        .inner_html_body {
+            background-color: pink;
+        }
+        .stopwatch {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            color: black;
+            text-align: center;
+            font-size: 80px;
+        }
+        .button_box {
+            width: 100%;
+            height: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            color: black;
+            text-align: center;
+            font-size: 80px;
+        }
+        .but {
+            width: 90px;
+            height: 60px;
+            margin: 10px;
+            font-size: 5px;
+        }
+    </style>
+
+</head>
+<body class='inner_html_body'>
+    <div id ="stopwatch" class="stopwatch"></div>
+    <div id ="button_box" class="button_box">
+        <input type="button" id="reset" onclick="reset()" value="초기화" 
+        class="btn" disabled style="color:red">
+        <input type="button" id="start" onclick="start()" value="시작" 
+        class="btn" style="color:black">
+        <input type="button" id="stop" onclick="stop()" value="중지" 
+        disabled class="btn" style="color:blue">
+    </div>
+    <script>
+        stopwathch_box = document.getElementById("stopwatch")
+        stopwatch_hour = 0
+        stopwatch_min = 0
+        stopwatch_sec = 0
+        stopwatch_millisec = 0
+        isActive=false
+
+        show();
+
+        function show(){
+            time_text = fillzero(stopwatch_hour) +":"+ fillzero(stopwatch_min)+
+            ":"+ fillzero(stopwatch_sec) +":"+  fillzero(stopwatch_millisec) 
+            stopwathch_box.innerText = time_text
+        }
+
+        function reset(){
+            stopwatch_hour =0
+            stopwatch_min =0
+            stopwatch_sec =0
+            stopwatch_millisec =0
+
+            isActive=false
+
+            document.getElementById("reset").disabled=false
+            document.getElementById("start").disabled=false
+            document.getElementById("stop").disabled=true
+
+            show()
+        }
+        function start(){
+            isActive=true
+
+            document.getElementById("reset").disabled=true
+            document.getElementById("start").disabled=true
+            document.getElementById("stop").disabled=false
+        }
+        function stop(){
+            isActive=false
+
+            document.getElementById("reset").disabled=false
+            document.getElementById("start").disabled=false
+            document.getElementById("stop").disabled=true
+        }
+        function fillzero(num) {
+            return('00' +num).slice(-2) //1->01롤 바꾸기 
+        }
+        function active(){
+            if(!isActive)
+                return
+            stopwatch_millisec +=1
+
+            if(stopwatch_millisec ==100){
+                stopwatch_sec +=1
+                stopwatch_millisec =0
+            }
+            if(stopwatch_sec ==60){
+                stopwatch_min +=1
+                stopwatch_sec =0  
+            }
+            if(stopwatch_min ==60){
+                stopwatch_hour +=1
+                stopwatch_min =0  
+            }
+            show()
+        }
+            setInterval(active,10);
+    </script>
+</body>
+</html>
